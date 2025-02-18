@@ -1,6 +1,6 @@
 export class SammichBuilder {
     constructor(containerId){
-        this.container = document.querySelector(containerId); 
+        this.container = document.getElementById(containerId); 
     }
 
     addIngredient(topping) {
