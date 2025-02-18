@@ -38,21 +38,27 @@ body{
 .ingredient {
     width: 200px;
     height: 30px;
-    margin: 3x 0;
+    margin: 3px 0;
     border-radius: 10px;
     transition: transform 0.2s ease-in-out;
 }
 
 .tomato {
     background-color: red;
+    width: 180px;
+
 }
 
 .lettuce {
     background-color: green;
+    width: 180px;
+
 }
 
 .turkey {
     background-color: #deb887;
+    width: 180px;
+
 }
 
 
