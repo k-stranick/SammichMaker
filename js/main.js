@@ -11,7 +11,7 @@ function calculateTotal(event) {
         total += toppingPrice[topping];
     }
 
-    document.getElementById("price").textContent = total.toFixed(2);
+    document.getElementById("total").textContent = total.toFixed(2);
 }
     
 document.querySelectorAll("button").forEach(button => {
