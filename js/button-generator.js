@@ -11,16 +11,16 @@ export class ButtonGenerator {
         }
 
         this.toppingPriceManager = new ToppingPriceManager;
-        this.callback = this.callback;
+        this.callback = callback;
 
         this.generateButtons();
     }
 
     generateButtons() {
-        Object.keys(this.toppingPriceManager.toppingPrice.forEach(topping => {
+        Object.keys(this.toppingPriceManager.toppingPrice).forEach(topping => {
             const button = document.createElement("button");
             button.id = `btn${topping}`;
-            button.className = `ntm btn-primary ingredient-btn`;
+            button.className = `btn btn-primary ingredient-btn`;
             button.textContent = `${topping.charAt(0).toUpperCase() + topping.slice(1)} ($${this.toppingPriceManager.toppingPrice[topping].toFixed(2)})`;
 
             button.addEventListener("click", (event) => {
@@ -29,7 +29,7 @@ export class ButtonGenerator {
 
             this.container.appendChild(button);
 
-        }));
+        });
     }
 
 
