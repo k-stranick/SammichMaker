@@ -23,7 +23,7 @@ export class SandwichApp {
         let topping = event.target.id.replace("btn", "").toLowerCase();
 
         this.toppingPriceManager.addTopping(topping);
-        this.totalDisplay.textContent = '$'`${this.toppingPriceManager.getFormattedTotal()}`;
+        this.totalDisplay.textContent = `${this.toppingPriceManager.getFormattedTotal()}`;
 
 
         this.sammichBuilder.addIngredient(topping)
