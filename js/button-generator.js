@@ -1,5 +1,6 @@
 import { ToppingPriceManager } from "./topping-price-manager.js";
 
+
 export class ButtonGenerator {
 
     constructor(containerId, calback) {

@@ -1,5 +1,6 @@
 import { SammichBuilder } from "./sammich-builder.js";
 import { ToppingPriceManager } from "./topping-price-manager.js";
+import { ButtonGenerator } from "./button-generator.js";
 
 export class SandwichApp {
     constructor() {
