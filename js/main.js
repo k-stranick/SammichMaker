@@ -15,8 +15,9 @@ function calculateTotal(event) {
         basePrice = cappedPrice;
     }
 
-    document.getElementById("total").textContent = total.toFixed(2);
+    document.getElementById("total").textContent = `$${basePrice.toFixed(2)}`;
 }
+
     
 document.querySelectorAll("button").forEach(button => {
     button.addEventListener("click",calculateTotal)
