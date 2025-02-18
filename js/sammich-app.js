@@ -1,11 +1,11 @@
-import { SammichBuilder } from "./sammich-builder";
-import { ToppingPriceManager } from "./topping-price-manager";
+import { SammichBuilder } from "./sammich-builder.js";
+import { ToppingPriceManager } from "./topping-price-manager.js";
 
 export class SandwichApp {
     constructor() {
-        this.toppingPriceManager = new ToppingPriceManager;
+        this.toppingPriceManager = new ToppingPriceManager();
         this.sammichBuilder = new SammichBuilder("middle");
-        this.totalDisplay = document.querySelector("total");
+        this.totalDisplay = document.getElementById("total");
         this.initialize();
     }
 
