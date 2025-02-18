@@ -8,11 +8,11 @@ function calculateTotal(event) {
     let topping = event.target.id.replace("btn", "").toLowerCase();
     
     if (topping in toppingPrice) {
-        total += toppingPrice[topping];
+        basePrice += toppingPrice[topping];
     }
 
-    if (total > cappedPrice) {
-        total = cappedPrice;
+    if (basePrice > cappedPrice) {
+        basePrice = cappedPrice;
     }
 
     document.getElementById("total").textContent = total.toFixed(2);
