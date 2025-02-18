@@ -11,6 +11,10 @@ function calculateTotal(event) {
         total += toppingPrice[topping];
     }
 
+    if (total > cappedPrice) {
+        total = cappedPrice;
+    }
+
     document.getElementById("total").textContent = total.toFixed(2);
 }
     
