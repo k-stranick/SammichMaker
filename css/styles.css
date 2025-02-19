@@ -1,38 +1,61 @@
-body{
-    background-color:maroon;
-    color:white;
+body {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
-.sandwich, .sandwich-layers {
+.sandwich,
+.sandwich-layers {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.bread{
+/* .bread {
     background-color: bisque;
-    border:1px solid tan;
-    width:85%;
-    max-width:415px;
-    margin:auto;
-    min-height:40px;
+    border: 1px solid tan;
+    width: 85%;
+    max-width: 415px;
+    margin: auto;
+    min-height: 40px;
+} */
+
+.bread {
+
+    /* Adjust as needed */
 }
 
 
-.top{
-    border-top-left-radius: 20%;
-    border-top-right-radius: 20%;
-}
-.bottom{
-    border-bottom-left-radius: 20%;
-    border-bottom-right-radius: 20%;
+
+
+.bread-top {
+    background-image: url("/assets/topBunXL1.jpg");
+    background-size: contain;
+    /* Ensures full image is visible */
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: -82px;
+    width: 100%;
+    max-width: 1522px;
+    height: 444px;
 }
 
-.size{
-    width:80%;
-    max-width:400px;
-    margin:auto;
-    min-height:30px;
+.bread-bottom {
+    background-image: url("/assets/bottomBunXL.jpg");
+    background-size: contain;
+    /* Ensures full image is visible */
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: -173px;
+    width: 100%;
+    max-width: 1522px;
+    height: 444px;
+}
+
+.size {
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+    min-height: 30px;
 }
 
 .ingredient {
