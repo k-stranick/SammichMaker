@@ -15,8 +15,11 @@ export class ToppingPriceManager {
 
     }
 
+    // getFormattedTotal() {
+    //     return `$${this.basePrice | currecny}`;
+    // }
     getFormattedTotal() {
-        return `$${this.basePrice.toFixed(2)}`;
+        return this.basePrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
 
 }

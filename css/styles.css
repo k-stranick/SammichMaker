@@ -28,7 +28,7 @@ body {
 
 
 .bread-top {
-    background-image: url("/assets/topBunXL1.jpg");
+    background-image: url("/assets/topBunXL2.jpg");
     background-size: contain;
     /* Ensures full image is visible */
     background-position: center;
@@ -45,10 +45,10 @@ body {
     /* Ensures full image is visible */
     background-position: center;
     background-repeat: no-repeat;
-    margin-top: -173px;
+    /* margin-top: -173px; */
     width: 100%;
     max-width: 1522px;
-    height: 444px;
+    height: 115px;
 }
 
 .size {
@@ -59,36 +59,40 @@ body {
 }
 
 .ingredient {
-    width: 200px;
-    height: 30px;
-    margin: 3px 0;
-    border-radius: 10px;
+    min-height: 50px;
+    width: 910px;
     transition: transform 0.2s ease-in-out;
 }
 
 .tomato {
     background-color: red;
-    width: 415px;
 
 }
 
 .lettuce {
     background-color: green;
-    width: 415px;
-
-}
-
-.turkey {
-    background-color: #deb887;
-    width: 415px;
 
 }
 
 .tofu {
-    background-color: whitesmoke;
-    width: 415px;
+    /* TODO WOKR ON PROPER CSS STYLING  */
+    background-image: url("/assets/tofu.jpg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 170px;
+}
+
+.turkey {
+    background-image: url("/assets/turke2y.jpg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 175px;
 
 }
+
+
 
 
 .ingredient-btn {
