@@ -3,99 +3,64 @@ body {
     color: rgb(0, 0, 0);
 }
 
-.sandwich,
-.sandwich-layers {
+.sandwich {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* .bread {
-    background-color: bisque;
-    border: 1px solid tan;
-    width: 85%;
-    max-width: 415px;
-    margin: auto;
-    min-height: 40px;
-} */
-
-.bread {
-
-    /* Adjust as needed */
-}
-
-
-
-
-.bread-top {
-    background-image: url("/assets/topBunXL2.jpg");
-    background-size: contain;
-    /* Ensures full image is visible */
-    background-position: center;
-    background-repeat: no-repeat;
-    margin-bottom: -82px;
+.sandwich-layers {
     width: 100%;
-    max-width: 1522px;
-    height: 444px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.bread-bottom {
-    background-image: url("/assets/bottomBunXL.jpg");
-    background-size: contain;
-    /* Ensures full image is visible */
-    background-position: center;
-    background-repeat: no-repeat;
-    /* margin-top: -173px; */
+.sandwich-container {
     width: 100%;
-    max-width: 1522px;
-    height: 115px;
-}
-
-.size {
-    width: 80%;
-    max-width: 400px;
-    margin: auto;
-    min-height: 30px;
+    max-width: 910px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
 }
 
 .ingredient {
-    min-height: 50px;
-    width: 910px;
-    transition: transform 0.2s ease-in-out;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
-.tomato {
+.ingredient.tomato {
     background-color: red;
 
 }
 
-.lettuce {
-    background-color: green;
-
+.ingredient-image {
+    width: 100%;
+    max-width: 910px;
+    height: auto;
+    object-fit: contain;
 }
 
-.tofu {
-    /* TODO WOKR ON PROPER CSS STYLING  */
-    background-image: url("/assets/tofu.jpg");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 170px;
+.bread-top-img,
+.bread-bottom-img {
+    width: 100%;
+    max-width: 910px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
 }
-
-.turkey {
-    background-image: url("/assets/turke2y.jpg");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 175px;
-
-}
-
-
-
 
 .ingredient-btn {
+    background-color: rgb(79, 247, 2);
     font-size: 18px;
     padding: 10px 20px;
     transition: transform 0.2s ease-in-out;

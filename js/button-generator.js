@@ -1,42 +1,3 @@
-// import { ToppingPriceManager } from "./topping-price-manager.js";
-
-
-// export class ButtonGenerator {
-
-//     constructor(containerId, calback) {
-//         this.container = document.getElementById(containerId);
-//         if (!this.container) {
-//             throw new Error(`Element with ID '${containerId}' not found.`);
-
-//         }
-
-//         this.toppingPriceManager = new ToppingPriceManager;
-//         this.callback = callback;
-
-//         this.generateButtons();
-//     }
-
-//     generateButtons() {
-//         Object.keys(this.toppingPriceManager.toppingPrice).forEach(topping => {
-//             const button = document.createElement("button");
-//             button.id = `btn${topping}`;
-//             button.className = `btn btn-primary ingredient-btn`;
-//             button.textContent = `${topping.charAt(0).toUpperCase() + topping.slice(1)} ($${this.toppingPriceManager.toppingPrice[topping].toFixed(2)})`;
-
-//             button.addEventListener("click", (event) => {
-//                 this.callback(event);
-//             });
-
-//             this.container.appendChild(button);
-
-//         });
-//     }
-
-
-
-// }
-
-
 import { ToppingPriceManager } from "./topping-price-manager.js";
 
 /**
@@ -56,14 +17,14 @@ export class ButtonGenerator {
         this.toppingPriceManager = new ToppingPriceManager(); // Manage topping prices
         this.callback = callback; // Function to call when button is clicked
 
-        this.generateButtons();
+        this.generateToppingButtons();
     }
 
     /**
      * Generates buttons dynamically based on available toppings.
      */
-    generateButtons() {
-        // Clear any existing buttons (useful if regenerating dynamically)
+    generateToppingButtons() {
+        // Clear any existing buttons
         this.container.innerHTML = "";
 
         // Loop through toppings and create buttons dynamically
@@ -71,7 +32,8 @@ export class ButtonGenerator {
             const button = document.createElement("button");
             button.id = `btn${topping}`;
             button.className = `btn btn-primary ingredient-btn`;
-            button.textContent = `${topping.charAt(0).toUpperCase() + topping.slice(1)} ($${this.toppingPriceManager.toppingPrice[topping].toFixed(2)})`;
+            button.textContent = `${topping.charAt(0).toUpperCase() + topping.slice(1)} 
+            $${this.toppingPriceManager.toppingPrice[topping].toFixed(2)}`;
 
             // Attach event listener with provided callback function
             button.addEventListener("click", this.callback);
