@@ -23,13 +23,30 @@ export class ToppingPriceManager {
          * @type {number}
          */
         this.BASE_PRICE = 3.00;
-        this.currentPrice = this.BASE_PRICE
+
+        /**
+         * The running total price of the sandwich.
+         * @type {number}
+         */
+        this.runningTotal = this.BASE_PRICE
 
         /**
          * The maximum price the sandwich can reach.
          * @type {number}
          */
         this.cappedPrice = 10.00;
+
+        /**
+         * An array to store the topping prices added to the sandwich.
+         * @type {Array.<string>}
+         */
+        this.priceArray = [];
+
+        // this.addToppingPrice = this.addToppingPrice.bind(this);
+        // this.removeToppingPrice = this.removeToppingPrice.bind(this);
+        // this.resetTotalToBase = this.resetTotalToBase.bind(this);
+        // this.getFormattedTotal = this.getFormattedTotal.bind(this);
+
     }
 
     /**
@@ -41,7 +58,9 @@ export class ToppingPriceManager {
 
         if (!this.toppingPrice[topping]) return; // If the topping does not exist in the array for the selected topping, exit the function.
 
-        this.BASE_PRICE = Math.min(this.BASE_PRICE + this.toppingPrice[topping], this.cappedPrice);
+        this.priceArray.push(topping);
+        this.recalculateTotal();
+
     }
 
 
@@ -51,18 +70,42 @@ export class ToppingPriceManager {
     removeToppingPrice(topping) {
         console.log("removeToppingPrice called for " + topping);
 
-        if (!this.toppingPrice[topping]) return;
-        this.currentPrice = Math.max((this.currentPrice - this.toppingPrice[topping]), this.BASE_PRICE);
-        return this.currentPrice;
+        const indexOfToppings = this.priceArray.indexOf(topping);
+        if (indexOfToppings === -1) return;
+
+        if (indexOfToppings !== -1) {
+            this.priceArray.splice(indexOfToppings, 1);
+            this.recalculateTotal();
+        }
+    }
+
+    clearAllToppings() {
+        this.priceArray = [];
+        this.recalculateTotal();
     }
 
 
-    /**
-     * Resets the total price to the base price.
-     */
-    resetTotalToBase() {
-        this.currentPrice = this.BASE_PRICE;
+
+    recalculateTotal() {
+        let total = this.BASE_PRICE;
+        if (this.priceArray.length !== 0) {
+            for (const topping of this.priceArray) {
+                total += this.toppingPrice[topping];
+
+                this.runningTotal = Math.min(total, this.cappedPrice);
+            }
+        } else {
+            this.runningTotal = this.BASE_PRICE;
+        }
+
     }
+
+    // /**
+    //  * Resets the total price to the base price.
+    //  */
+    // resetTotalToBase() {
+    //     this.priceArray = this.BASE_PRICE;
+    // }
 
     /**
      * Returns the formatted total price of the sandwich as a currency string.
@@ -70,7 +113,7 @@ export class ToppingPriceManager {
      */
     getFormattedTotal() {
 
-        return this.BASE_PRICE.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        return this.runningTotal.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
 
 }

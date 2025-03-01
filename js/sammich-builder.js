@@ -1,5 +1,5 @@
 /**
- * SammichBuilder is responsible for managing the sandwich layers within a specified container.
+ * SammichBuilder is responsible for managing the sandwich HTML layers within a specified container.
  * It allows adding ingredients as layers to the sandwich.
  */
 
@@ -41,11 +41,11 @@ export class SammichBuilder {
     removeIngredient() {
         if (this.container.firstChild) {
             const removedIngredient = this.container.firstChild;
-            const ingredientType = removedIngredient.classList[1]; // Get the topping name
+            const ingredientName = removedIngredient.classList[1]; // Get the topping name
 
             this.container.removeChild(removedIngredient);
-            console.log(ingredientType, " removed");
-            return ingredientType; // Return the removed topping for price update
+            console.log(ingredientName, " removed");
+            return ingredientName; // Return the removed topping for price update
         }
         console.log("removeIngredient firstChild is null all ingredients cleared");
         return null;

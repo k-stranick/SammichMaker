@@ -11,7 +11,7 @@
   <script type="module" src="js/main.js"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column vh-100">
 
   <div class="container-fluid p-5 bg-primary text-white text-center">
     <h1>Make your sandwich 🥪</h1>
@@ -24,12 +24,12 @@
   </div>
 
   <!-- Display the base price dynamically  -->
-  <div class="container mt-5">
+  <div class="container mt-5 mb 5">
     <div class="col-sm-3 text-center">
-      <h2 class="mt-3">Price $</h2>
-      <span id="running-total" class="fs-3 fw-bold">$3.00</span>
+      <h2 class="mt-3">Price:</h2>
+      <span id="running-total" class="fs-3 fw-bold"></span>
     </div>
-    <div class="col-sm-9 sandwich mt-5">
+    <div class="col-sm-9 sandwich mt-5 mb-5">
       <div class="bread-top">
         <img src="/assets/topBunXL2.jpg" alt="bread-top" class="bread-top-img">
       </div>

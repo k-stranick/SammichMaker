@@ -27,19 +27,16 @@ export class SandwichApp {
          */
         this.totalDisplay = document.getElementById("running-total");
 
+        /**
+         * Instance of ButtonGenerator to create topping buttons.
+         * @type {ButtonGenerator}
+         */
         this.buttonGenerator = new ButtonGenerator("topping-button-container", this.handleToppingButtonClick.bind(this));
-        // this.initialize();
+
+
+        this.updatePriceDisplay();
 
     }
-
-    /**
-         * Sets up event listeners for ingredient actions.
-         */
-    // initialize() {
-    //     document.getElementById("removeLast").addEventListener("click", () => this.handleRemoveTopping());
-    //     document.getElementById("clearAll").addEventListener("click", () => this.handleClearToppings());
-    // }
-
 
     /**
      * Handles the click event for topping buttons.
@@ -50,44 +47,27 @@ export class SandwichApp {
         /**
          * Extract the topping name from the button ID.
          * The button ID is expected to be in the format "btnToppingName".
-         * This line removes the "btn" prefix and converts the remaining string to lowercase.
-         * For example, "btnTomato" becomes "tomato".
          */
         const topping = event.target.id.replace("btn", "").toLowerCase();
 
-        /**
-         * Add the topping price to the total price using the ToppingPriceManager.
-         * @param {string} topping - The name of the topping to add.
-         */
         this.toppingPriceManager.addToppingPrice(topping);
-
-        /**
-         * Update the displayed total price.
-         * The total price is formatted as a currency string.
-         */
-        // this.totalDisplay.textContent = `${this.toppingPriceManager.getFormattedTotal()}`;
-
-        /**
-         * Add the topping as a new ingredient layer in the sandwich.
-         * @param {string} topping - The name of the topping to add.
-         */
         this.sammichBuilder.addIngredient(topping)
-
         this.updatePriceDisplay();
-
     }
 
     /**
- * Removes the last added ingredient and updates the price.
- */
+    * Removes the last added ingredient and updates the price.
+    */
     handleRemoveTopping(topping) {
+        // console.log("removeTopping called for " + topping
+        // ); //DEBUG STATEMENT
+
         const removedTopping = this.sammichBuilder.removeIngredient(topping);
 
-        if (removedTopping) {
+        if (!removedTopping) return; // nothing to remove
 
-            this.toppingPriceManager.removeToppingPrice(removedTopping);
-            this.updatePriceDisplay();
-        }
+        this.toppingPriceManager.removeToppingPrice(removedTopping);
+        this.updatePriceDisplay();
     }
 
     /**
@@ -95,16 +75,15 @@ export class SandwichApp {
      */
     handleClearToppings() {
         this.sammichBuilder.clearIngredients();
-
-        this.toppingPriceManager.resetTotalToBase();
+        this.toppingPriceManager.clearAllToppings();
         this.updatePriceDisplay();
 
     }
 
-    /**TODO MAKE THIS EAT TOPPING */
     /**
- * Updates the displayed price.
- */
+    * Updates the displayed price.
+    * @type {HTMLElement} - The element where the total price is displayed.
+    */
     updatePriceDisplay() {
         this.totalDisplay.textContent = this.toppingPriceManager.getFormattedTotal();
     }
