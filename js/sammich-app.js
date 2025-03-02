@@ -38,8 +38,7 @@ export class SandwichApp {
          * Instance of ButtonGenerator to create topping buttons.
          * @type {ButtonGenerator}
         */
-        this.buttonGenerator = new ButtonGenerator("topping-button-container", this.handleToppingButtonClick);
-
+        this.buttonGenerator = new ButtonGenerator("topping-button-container", this.toppingPriceManager.getToppings(), this.handleToppingButtonClick);
         this.bindButtonEventListeners();
         this.updatePriceDisplay();
     }
@@ -47,10 +46,10 @@ export class SandwichApp {
 
     bindButtonEventListeners() {
         // Bind remove ingredient button
-        document.getElementById("removeLast").addEventListener("click", () => { this.handleRemoveTopping(); });
+        document.getElementById("removeLast").addEventListener("click", this.handleRemoveTopping);
 
         // Bind clear all button
-        document.getElementById("clearAll").addEventListener("click", () => { this.handleClearToppings(); });
+        document.getElementById("clearAll").addEventListener("click", this.handleClearToppings);
     }
 
     /**
@@ -63,9 +62,23 @@ export class SandwichApp {
          * Extract the topping name from the button ID.
          * The button ID is expected to be in the format "btnToppingName".
          */
-        const topping = event.target.id.replace("btn", "").toLowerCase();
+
+
+        // const topping = event.target.id.replace("btn", "").toLowerCase();
+        const topping = event.target.dataset.topping; // ✅ Directly use dataset
+        if (!topping) return console.error("Invalid topping clicked.");
+
+        // const price = this.toppingPriceManager.toppingPrice[topping];
+        // if (price === undefined) {
+        //     console.error(`Invalid topping selected: ${topping}`);
+        //     return;
+        // }
+
+        // console.log(`Adding ${topping} to sandwich with price: $${price}`);
 
         this.toppingPriceManager.addToppingPrice(topping);
+        // console.log(`Updated Total Price: ${this.toppingPriceManager.runningTotal}`);
+
         this.sammichBuilder.addIngredient(topping)
         this.updatePriceDisplay();
     }
@@ -76,11 +89,13 @@ export class SandwichApp {
     */
     handleRemoveTopping(topping) {
         const removedTopping = this.sammichBuilder.removeIngredient(topping);
+        if (!removedTopping) return;
 
-        if (!removedTopping) return; // nothing to remove
+        // if (removedTopping) {
 
         this.toppingPriceManager.removeToppingPrice(removedTopping);
         this.updatePriceDisplay();
+        // }
     }
 
     /**
@@ -98,6 +113,8 @@ export class SandwichApp {
     * @type {HTMLElement} - The element where the total price is displayed.
     */
     updatePriceDisplay() {
+        // console.log("Updating price display: ", this.toppingPriceManager.getFormattedTotal());
+
         this.totalDisplay.textContent = this.toppingPriceManager.getFormattedTotal();
     }
 }

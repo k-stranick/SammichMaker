@@ -6,13 +6,6 @@
 
 export class SammichBuilder {
 
-    ingredientsImages = {
-        turkey: "/assets/turke2y.jpg",
-        tofu: "/assets/tofu.jpg",
-        lettuce: "/assets/lettuce.jpg",
-        tomato: "/assets/tomato.jpg",
-    };
-
     /**
      * Creates an instance of SammichBuilder.
      * 
@@ -20,6 +13,12 @@ export class SammichBuilder {
      */
     constructor(containerId) {
         this.container = document.getElementById(containerId);
+        this.ingredientsImages = {
+            turkey: "/assets/turke2y.jpg",
+            tofu: "/assets/tofu.jpg",
+            lettuce: "/assets/lettuce.jpg",
+            tomato: "/assets/tomato.jpg",
+        };
     }
 
     /**
@@ -38,26 +37,30 @@ export class SammichBuilder {
      * Removes the top (last added) ingredient from the sandwich.
      */
     removeIngredient() {
-        if (this.container.firstChild) {
-            const removedIngredient = this.container.firstChild;
-            const ingredientName = removedIngredient.classList[1]; // Get the topping name
+        if (!this.container.firstChild) return null;
 
-            this.container.removeChild(removedIngredient);
-            console.log(ingredientName, " removed");
-            return ingredientName; // Return the removed topping for price update
-        }
-        console.log("removeIngredient firstChild is null all ingredients cleared");
-        return null;
+        // if (this.container.firstChild) {
 
+        const removedIngredient = this.container.firstChild;
+        this.container.removeChild(removedIngredient);
+        //const ingredientName = removedIngredient.classList[1]; // Get the topping name
+        //return ingredientName; // Return the removed topping for price update
+        return removedIngredient.classList[1] || null; // Return the removed topping for price update
+        // }
+
+        // return null;
     }
 
     /**
      * Removes all ingredients from the sandwich.
      */
     clearIngredients() {
-        while (this.container.firstChild) {
-            this.container.removeChild(this.container.firstChild);
-        }
+        // while (this.container.firstChild) {
+        //     this.container.removeChild(this.container.firstChild);
+        // }
+
+        this.container.innerHTML = ""; // ✅ More efficient than looping
+
     }
 
     /**
@@ -67,7 +70,6 @@ export class SammichBuilder {
     addIngredientImageFor(topping, ingredientDiv) {
 
         if (!this.ingredientsImages[topping]) {
-            console.log("no img for: " + topping);
             return; // If the topping does not have an image, exit the function
         }
 
