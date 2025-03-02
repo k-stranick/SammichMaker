@@ -30,7 +30,6 @@ export class SammichBuilder {
         const newlyCreatedDiv = document.createElement("div"); // Create a new div element
 
         newlyCreatedDiv.classList.add("ingredient", passedTopping); // adds the class name ingredient and the passedTopping to the newlyCreatedDiv
-        console.log(newlyCreatedDiv.classList);
         this.addIngredientImageFor(passedTopping, newlyCreatedDiv); // Add the image of the ingredient to the sandwich
         this.container.prepend(newlyCreatedDiv); // Add the newlyCreatedDiv to the top of the container
     }
@@ -56,8 +55,9 @@ export class SammichBuilder {
      * Removes all ingredients from the sandwich.
      */
     clearIngredients() {
-        console.log("clearIngredients cleared html");
-        this.container.innerHTML = ""; // Clear all ingredients from the container
+        while (this.container.firstChild) {
+            this.container.removeChild(this.container.firstChild);
+        }
     }
 
     /**

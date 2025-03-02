@@ -42,10 +42,9 @@ export class ToppingPriceManager {
          */
         this.priceArray = [];
 
-        // this.addToppingPrice = this.addToppingPrice.bind(this);
-        // this.removeToppingPrice = this.removeToppingPrice.bind(this);
-        // this.resetTotalToBase = this.resetTotalToBase.bind(this);
-        // this.getFormattedTotal = this.getFormattedTotal.bind(this);
+        this.addToppingPrice = this.addToppingPrice.bind(this);
+        this.removeToppingPrice = this.removeToppingPrice.bind(this);
+        this.getFormattedTotal = this.getFormattedTotal.bind(this);
 
     }
 
@@ -97,16 +96,7 @@ export class ToppingPriceManager {
         } else {
             this.runningTotal = this.BASE_PRICE;
         }
-
     }
-
-    // /**
-    //  * Resets the total price to the base price.
-    //  */
-    // resetTotalToBase() {
-    //     this.priceArray = this.BASE_PRICE;
-    // }
-
     /**
      * Returns the formatted total price of the sandwich as a currency string.
      * @returns {string} The formatted total price.
@@ -115,5 +105,6 @@ export class ToppingPriceManager {
 
         return this.runningTotal.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
+
 
 }

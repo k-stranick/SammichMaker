@@ -38,16 +38,12 @@ body {
     z-index: 1;
 }
 
-.ingredient.tomato {
-    background-color: red;
-
-}
-
 .ingredient-image {
     width: 100%;
     max-width: 900px;
     height: auto;
     object-fit: contain;
+    cursor: pointer;
 }
 
 .bread-top-img,

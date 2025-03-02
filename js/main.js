@@ -21,24 +21,13 @@
  ********************************************************************************/
 
 import { SandwichApp } from "./sammich-app.js";
-const app = new SandwichApp();
-
-//document.addEventListener("DOMContentLoaded", () => {
-// app // Create a new instance of SandwichApp
-
-// window.app = new SandwichApp(); // Optionally, create and expose for global debugging
-//});
+// const app = new SandwichApp();
 
 document.addEventListener("DOMContentLoaded", () => {
+    const app = new SandwichApp();
 
+    // app // Create a new instance of SandwichApp
 
-    // Bind remove ingredient button
-    document.getElementById("removeLast").addEventListener("click", () => {
-        app.handleRemoveTopping();
-    });
-
-    // Bind clear all button
-    document.getElementById("clearAll").addEventListener("click", () => {
-        app.handleClearToppings();
-    });
+    // window.app = new SandwichApp(); // Optionally, create and expose for global debugging
 });
+

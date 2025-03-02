@@ -26,20 +26,22 @@ export class ButtonGenerator {
     generateToppingButtons() {
         // Clear any existing buttons
         this.container.innerHTML = "";
+        const fragment = document.createDocumentFragment();
 
         // Loop through toppings and create buttons dynamically
         Object.keys(this.toppingPriceManager.toppingPrice).forEach(topping => {
             const button = document.createElement("button");
             button.id = `btn${topping}`;
             button.className = `btn btn-primary ingredient-btn`;
-            button.textContent = `${topping.charAt(0).toUpperCase() + topping.slice(1)} 
-            $${this.toppingPriceManager.toppingPrice[topping].toFixed(2)}`;
+            button.textContent = `${topping.charAt(0).toUpperCase() + topping.slice(1)} $${this.toppingPriceManager.toppingPrice[topping].toFixed(2)}`;
 
             // Attach event listener with provided callback function
             button.addEventListener("click", this.callback);
+            fragment.appendChild(button);
 
-            // Append button to the container
-            this.container.appendChild(button);
         });
+
+        // Append button to the container
+        this.container.appendChild(fragment);
     }
 }

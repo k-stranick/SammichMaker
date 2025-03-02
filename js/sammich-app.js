@@ -7,6 +7,7 @@ import { ButtonGenerator } from "./button-generator.js";
  * It handles user interactions, updates the total price, and manages the sandwich layers.
  */
 export class SandwichApp {
+
     constructor() {
 
         /**
@@ -27,15 +28,29 @@ export class SandwichApp {
          */
         this.totalDisplay = document.getElementById("running-total");
 
+
+        this.handleToppingButtonClick = this.handleToppingButtonClick.bind(this);
+        this.handleRemoveTopping = this.handleRemoveTopping.bind(this);
+        this.handleClearToppings = this.handleClearToppings.bind(this);
+
+
         /**
          * Instance of ButtonGenerator to create topping buttons.
          * @type {ButtonGenerator}
-         */
-        this.buttonGenerator = new ButtonGenerator("topping-button-container", this.handleToppingButtonClick.bind(this));
+        */
+        this.buttonGenerator = new ButtonGenerator("topping-button-container", this.handleToppingButtonClick);
 
-
+        this.bindButtonEventListeners();
         this.updatePriceDisplay();
+    }
 
+
+    bindButtonEventListeners() {
+        // Bind remove ingredient button
+        document.getElementById("removeLast").addEventListener("click", () => { this.handleRemoveTopping(); });
+
+        // Bind clear all button
+        document.getElementById("clearAll").addEventListener("click", () => { this.handleClearToppings(); });
     }
 
     /**
@@ -55,13 +70,11 @@ export class SandwichApp {
         this.updatePriceDisplay();
     }
 
+
     /**
     * Removes the last added ingredient and updates the price.
     */
     handleRemoveTopping(topping) {
-        // console.log("removeTopping called for " + topping
-        // ); //DEBUG STATEMENT
-
         const removedTopping = this.sammichBuilder.removeIngredient(topping);
 
         if (!removedTopping) return; // nothing to remove
