@@ -14,20 +14,16 @@
  *  3. All event listeners and sandwich-building logic are handled inside the
  *     SandwichApp constructor and its methods.
  *
- * Note: If SonarQube warns about “useless object instantiation,” I can store the
+ * Note: If SonarQube warns about “useless object instantiation,” you can store the
  * instance in a variable (e.g., `const app = new SandwichApp()`) or call additional
- * methods on it to illustrate its usage. I can also expose it globally by
- * assigning it to `window.app` if I need access via the browser console.
+ * methods on it to illustrate its usage. You can also expose it globally by
+ * assigning it to `window.app` if you need direct access via the browser console.
  ********************************************************************************/
 
 import { SandwichApp } from "./sammich-app.js";
-// const app = new SandwichApp();
 
 document.addEventListener("DOMContentLoaded", () => {
     const app = new SandwichApp();
-
-    // app // Create a new instance of SandwichApp
-
     // window.app = new SandwichApp(); // Optionally, create and expose for global debugging
 });
 

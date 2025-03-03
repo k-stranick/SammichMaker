@@ -1,18 +1,31 @@
-/**
- * ToppingPriceManager is responsible for managing the prices of sandwich toppings.
- * It allows adding toppings to the base price and provides a formatted total price.
- */
+/********************************************************************************
+ * @file topping-price-manager.js
+ * Manages the prices of sandwich toppings for the Sandwich Maker application.
+ *
+ * - Allows adding, removing, and clearing toppings.
+ * - Recalculates the total price based on the selected toppings.
+ * - Provides a formatted total price as a currency string.
+ *
+ * Usage:
+ *  1. Create an instance of ToppingPriceManager.
+ *  2. Use addToppingPrice(topping) to add a topping.
+ *  3. Use removeToppingPrice(topping) to remove a topping.
+ *  4. Use clearAllToppings() to clear all toppings.
+ *  5. Use getFormattedTotal() to get the formatted total price.
+ *
+ * Example:
+ *  const toppingManager = new ToppingPriceManager();
+ *  toppingManager.addToppingPrice('turkey');
+ *  console.log(toppingManager.getFormattedTotal());
+ ********************************************************************************/
 export class ToppingPriceManager {
 
-    /**
-     * Creates an instance of ToppingPriceManager.
-     * Initializes the topping prices, base price, and capped price.
-     */
     constructor() {
 
         /**
-         * An object containing the prices of available toppings.
+         * An object containing a dictionary where each key is a topping name and each value is the price of that topping
          * @type {Object.<string, number>}
+         * 
          */
         this.toppingPrice = {
             turkey: 5.00, tofu: 5.00, lettuce: .75, tomato: 2.00
@@ -21,103 +34,110 @@ export class ToppingPriceManager {
         /**
          * The base price of the sandwich.
          * @type {number}
+         * 
          */
         this.BASE_PRICE = 3.00;
 
         /**
          * The running total price of the sandwich.
          * @type {number}
+         * 
          */
         this.runningTotal = this.BASE_PRICE
 
         /**
          * The maximum price the sandwich can reach.
          * @type {number}
+         * 
          */
         this.cappedPrice = 10.00;
 
         /**
          * An array to store the topping prices added to the sandwich.
          * @type {Array.<string>}
+         * 
          */
-        this.priceArray = [];
-
-        // this.addToppingPrice = this.addToppingPrice.bind(this);
-        // this.removeToppingPrice = this.removeToppingPrice.bind(this);
-        // this.getFormattedTotal = this.getFormattedTotal.bind(this);
-
+        this.toppingNames = [];
     }
 
+
+    /**
+     * Retrieves the list of available toppings.
+     * @returns {Array.<string>} An array of topping names.
+     */
     getToppings() {
         return Object.keys(this.toppingPrice);
     }
+
 
     /**
      * Adds the price of a topping to the base price, ensuring it does not exceed the capped price.
      * @param {string} topping - The name of the topping to add.
      */
     addToppingPrice(topping) {
-        // console.log("addToppingPrice called for " + topping);
+        if (!this.toppingPrice[topping]) return; // If the topping does not exist in the array for the selected topping, exit the function.
 
-        if (!this.toppingPrice[topping]) //{
-            // console.error(`Topping ${topping} does not exist in toppingPrice`);
-
-            return; // If the topping does not exist in the array for the selected topping, exit the function.
-        // }
-        this.priceArray.push(topping);
+        this.toppingNames.push(topping);
         this.recalculateTotal();
-        // console.log("New total after adding:", this.runningTotal);
-
     }
 
 
     /**
-    * Removes a topping price from the total.
-    */
+     * Removes a topping price from the total.
+     */
     removeToppingPrice(topping) {
-        // console.log("removeToppingPrice called for " + topping);
-
-        const indexOfToppings = this.priceArray.lastIndexOf(topping);
+        const indexOfToppings = this.toppingNames.lastIndexOf(topping);
         if (indexOfToppings === -1) return;
 
-        if (indexOfToppings !== -1) {
-            this.priceArray.splice(indexOfToppings, 1);
-            this.recalculateTotal();
-        }
-    }
-
-    clearAllToppings() {
-        this.priceArray = [];
+        this.toppingNames.splice(indexOfToppings, 1);
         this.recalculateTotal();
     }
 
+
+    /**
+     * Clears all toppings and resets the total price to the base price by emptying the price array and recalculating the total price of the .
+     */
+    clearAllToppingPrices() {
+        this.toppingNames = [];
+        this.recalculateTotal();
+    }
+
+
+    /**
+     * Recalculates the total price of an item based on selected toppings.
+     *
+     * This method ensures `toppingNames` is initialized before computing the total cost.
+     * It sums the base price (`BASE_PRICE`) with the prices of selected toppings from 
+     * the `toppingPrice` object. If a topping is missing, it defaults to a price of 0.
+     * The final total is capped at `cappedPrice` to prevent exceeding a predefined limit.
+     *
+     * Key Details:
+     * - If `toppingNames` is undefined, it is initialized as an empty array.
+     * - Uses `.reduce()` with `BASE_PRICE` as the initial accumulator value.
+     * - Ensures the total does not exceed `cappedPrice` using `Math.min()`.
+     *
+     * Edge Cases Handled:
+     * - Prevents errors when `toppingNames` is undefined or empty.
+     * - Avoids issues if a topping is not found in `toppingPrice`.
+     *
+     * @returns {number} The newly calculated total price, also stored in `runningTotal`.
+     * @throws {Error} Not thrown directly, but logs an error if `toppingNames` is undefined.
+     */
     recalculateTotal() {
 
-        if (!this.priceArray) {
-            console.error("priceArray is undefined! Initializing to empty array.");
-            this.priceArray = [];
+        if (!this.toppingNames) {
+            console.error("toppingNames is undefined! Initializing to empty array.");
+            this.toppingNames = [];
         }
-        const total = this.priceArray.reduce((sum, topping) => sum + this.toppingPrice[topping], this.BASE_PRICE);
+
+        const total = this.toppingNames.reduce((sum, topping) => {
+            return sum + (this.toppingPrice[topping] || 0);
+
+        }, this.BASE_PRICE);
+
         this.runningTotal = Math.min(total, this.cappedPrice);
     }
 
-    // recalculateTotal() {
-    //     let total = this.BASE_PRICE;
-    //     console.log("Recalculating total... Base price:", total);
-
-    //     // if (this.priceArray.length !== 0) {
-    //     for (const topping of this.priceArray) {
-    //         total += this.toppingPrice[topping] || 0;
-
-    //     }
-    //     this.runningTotal = Math.min(total, this.cappedPrice);
-    //     console.log("Recalculated total:", this.runningTotal);
-
-
-    //     // } else {
-    //     // this.runningTotal = this.BASE_PRICE;
-    //     // }
-    // }
 
     /**
      * Returns the formatted total price of the sandwich as a currency string.

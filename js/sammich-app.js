@@ -1,3 +1,18 @@
+/********************************************************************************
+ * @file sammich-app.js
+ * Main application logic for the Sandwich Maker application.
+ *
+ * - Manages user interactions, updates the total price, and handles sandwich layers.
+ * - Integrates with ToppingPriceManager, SammichBuilder, and ButtonGenerator.
+ *
+ * Usage:
+ *  1. Create an instance of SandwichApp.
+ *  2. The instance will handle button clicks, topping additions, and price updates.
+ *
+ * Example:
+ *  const app = new SandwichApp();
+ ********************************************************************************/
+
 import { SammichBuilder } from "./sammich-builder.js";
 import { ToppingPriceManager } from "./topping-price-manager.js";
 import { ButtonGenerator } from "./button-generator.js";
@@ -8,6 +23,11 @@ import { ButtonGenerator } from "./button-generator.js";
  */
 export class SandwichApp {
 
+    /**
+     * Creates an instance of SandwichApp.
+     * Initializes the ToppingPriceManager, SammichBuilder, and ButtonGenerator.
+     * Binds event handlers and updates the initial price display.
+     */
     constructor() {
 
         /**
@@ -28,82 +48,68 @@ export class SandwichApp {
          */
         this.totalDisplay = document.getElementById("running-total");
 
-
-        this.handleToppingButtonClick = this.handleToppingButtonClick.bind(this);
-        this.handleRemoveTopping = this.handleRemoveTopping.bind(this);
-        this.handleClearToppings = this.handleClearToppings.bind(this);
+        // Bind methods to ensure 'this' refers to the instance
+        this.handleIngredientButtonClick = this.handleIngredientButtonClick.bind(this);
+        this.handleRemoveIngredient = this.handleRemoveIngredient.bind(this);
+        this.handleClearIngredients = this.handleClearIngredients.bind(this);
 
 
         /**
          * Instance of ButtonGenerator to create topping buttons.
          * @type {ButtonGenerator}
         */
-        this.buttonGenerator = new ButtonGenerator("topping-button-container", this.toppingPriceManager.getToppings(), this.handleToppingButtonClick);
-        this.bindButtonEventListeners();
+        this.buttonGenerator = new ButtonGenerator("topping-button-container", this.toppingPriceManager.getToppings(), this.handleIngredientButtonClick);
+        this.initializeClearButtons();
         this.updatePriceDisplay();
     }
 
-
-    bindButtonEventListeners() {
-        // Bind remove ingredient button
-        document.getElementById("removeLast").addEventListener("click", this.handleRemoveTopping);
-
-        // Bind clear all button
-        document.getElementById("clearAll").addEventListener("click", this.handleClearToppings);
+    /**
+     * Initializes event listeners for the control buttons (remove and clear).
+     */
+    initializeClearButtons() {
+        document.getElementById("removeLast").addEventListener("click", this.handleRemoveIngredient);
+        document.getElementById("clearAll").addEventListener("click", this.handleClearIngredients);
     }
+
 
     /**
      * Handles the click event for topping buttons.
      * Adds the topping to the sandwich, updates the total price, and adds the ingredient layer.
      * @param {Event} event - The click event object.
      */
-    handleToppingButtonClick(event) {
+    handleIngredientButtonClick(event) {
         /**
-         * Extract the topping name from the button ID.
-         * The button ID is expected to be in the format "btnToppingName".
+         * Extracts the topping name from the dataset
+         * @type {string} - The topping name from the dataset.
          */
+        const ingredient = event.target.dataset.topping; // Directly use dataset
 
+        if (!ingredient) return console.error("Invalid topping clicked.");
 
-        // const topping = event.target.id.replace("btn", "").toLowerCase();
-        const topping = event.target.dataset.topping; // ✅ Directly use dataset
-        if (!topping) return console.error("Invalid topping clicked.");
-
-        // const price = this.toppingPriceManager.toppingPrice[topping];
-        // if (price === undefined) {
-        //     console.error(`Invalid topping selected: ${topping}`);
-        //     return;
-        // }
-
-        // console.log(`Adding ${topping} to sandwich with price: $${price}`);
-
-        this.toppingPriceManager.addToppingPrice(topping);
-        // console.log(`Updated Total Price: ${this.toppingPriceManager.runningTotal}`);
-
-        this.sammichBuilder.addIngredient(topping)
+        this.toppingPriceManager.addToppingPrice(ingredient);
+        this.sammichBuilder.addIngredient(ingredient);
         this.updatePriceDisplay();
     }
 
 
     /**
-    * Removes the last added ingredient and updates the price.
-    */
-    handleRemoveTopping(topping) {
-        const removedTopping = this.sammichBuilder.removeIngredient(topping);
-        if (!removedTopping) return;
+     * Removes the last added ingredient and updates the price.
+     * @param {string} ingredient - The name of the topping to remove.
+     */
+    handleRemoveIngredient(ingredient) {
+        const removedIngredient = this.sammichBuilder.removeIngredient(ingredient);
+        if (!removedIngredient) return;
 
-        // if (removedTopping) {
-
-        this.toppingPriceManager.removeToppingPrice(removedTopping);
+        this.toppingPriceManager.removeToppingPrice(removedIngredient);
         this.updatePriceDisplay();
-        // }
     }
 
     /**
      * Clears all ingredients and resets the price.
      */
-    handleClearToppings() {
+    handleClearIngredients() {
         this.sammichBuilder.clearIngredients();
-        this.toppingPriceManager.clearAllToppings();
+        this.toppingPriceManager.clearAllToppingPrices();
         this.updatePriceDisplay();
 
     }
@@ -113,8 +119,6 @@ export class SandwichApp {
     * @type {HTMLElement} - The element where the total price is displayed.
     */
     updatePriceDisplay() {
-        // console.log("Updating price display: ", this.toppingPriceManager.getFormattedTotal());
-
         this.totalDisplay.textContent = this.toppingPriceManager.getFormattedTotal();
     }
 }
