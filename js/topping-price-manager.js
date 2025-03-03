@@ -69,13 +69,22 @@ export class ToppingPriceManager {
         return Object.keys(this.toppingPrice);
     }
 
+    /**
+ * Retrieves the price of a given topping.
+ * @param {string} topping - The name of the topping.
+ * @returns {number} The price of the topping, or 0 if not found.
+ */
+    getPrice(topping) {
+        return this.toppingPrice[topping] ?? 0; // Uses Nullish Coalescing to return 0 if undefined
+    }
+
 
     /**
      * Adds the price of a topping to the base price, ensuring it does not exceed the capped price.
      * @param {string} topping - The name of the topping to add.
      */
     addToppingPrice(topping) {
-        if (!this.toppingPrice[topping]) return; // If the topping does not exist in the array for the selected topping, exit the function.
+        if (!this.getPrice) return; // If the topping does not exist in the array for the selected topping, exit the function.
 
         this.toppingNames.push(topping);
         this.recalculateTotal();
@@ -131,7 +140,7 @@ export class ToppingPriceManager {
         }
 
         const total = this.toppingNames.reduce((sum, topping) => {
-            return sum + (this.toppingPrice[topping] || 0);
+            return sum + this.getPrice(topping);
 
         }, this.BASE_PRICE);
 

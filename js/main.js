@@ -22,8 +22,17 @@
 
 import { SandwichApp } from "./sammich-app.js";
 
+// document.addEventListener("DOMContentLoaded", () => {
+//     const app = new SandwichApp();
+//     // window.app = new SandwichApp(); // Optionally, create and expose for global debugging
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
     const app = new SandwichApp();
-    // window.app = new SandwichApp(); // Optionally, create and expose for global debugging
-});
 
+    // Initialize the tooltip for the help button
+    const helpButton = document.getElementById("help-button");
+    if (helpButton) {
+        new bootstrap.Tooltip(helpButton);
+    }
+});

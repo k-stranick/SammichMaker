@@ -58,8 +58,9 @@ export class SandwichApp {
          * Instance of ButtonGenerator to create topping buttons.
          * @type {ButtonGenerator}
         */
-        this.buttonGenerator = new ButtonGenerator("topping-button-container", this.toppingPriceManager.getToppings(), this.handleIngredientButtonClick);
+        this.buttonGenerator = new ButtonGenerator("topping-button-container", this.toppingPriceManager.getToppings(), this.handleIngredientButtonClick, this.toppingPriceManager);
         this.initializeClearButtons();
+        this.initializeIngredientRemovalListener();
         this.updatePriceDisplay();
     }
 
@@ -71,6 +72,16 @@ export class SandwichApp {
         document.getElementById("clearAll").addEventListener("click", this.handleClearIngredients);
     }
 
+    /**
+ * Listens for ingredient removal and updates the total price.
+ */
+    initializeIngredientRemovalListener() {
+        document.addEventListener("ingredientRemoved", (event) => {
+            const ingredient = event.detail;
+            this.toppingPriceManager.removeToppingPrice(ingredient);
+            this.updatePriceDisplay();
+        });
+    }
 
     /**
      * Handles the click event for topping buttons.

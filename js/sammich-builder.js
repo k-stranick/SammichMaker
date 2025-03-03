@@ -50,11 +50,17 @@ export class SammichBuilder {
 
         ingredientHtmlElement.classList.add("ingredient", passedTopping); // Add the class name 'ingredient' and the passedTopping to the ingredientHtmlElement
         this.addIngredientImageFor(passedTopping, ingredientHtmlElement); // Add the image of the ingredient to the sandwich
+        // Attach a click event to remove this specific ingredient when clicked
+        ingredientHtmlElement.addEventListener("click", () => {
+            this.removeClickedIngredient(ingredientHtmlElement, passedTopping);
+        });
+
+
         this.container.append(ingredientHtmlElement); // Add the ingredientHtmlElement to the top of the container
     }
 
     /**
-     * Removes the bottom (last added) ingredient from the sandwich.
+     * Removes the bottom (last added) ingredient from the sandwich when using remove button.
      * 
      * @returns {string|null} The class name of the removed topping, or null if no ingredient was removed.
      */
@@ -72,6 +78,19 @@ export class SammichBuilder {
      */
     clearIngredients() {
         this.container.innerHTML = "";
+    }
+
+
+    /**
+ * Removes the specific clicked ingredient from the sandwich.
+ * @param {HTMLElement} ingredientElement - The element to remove.
+ * @param {string} ingredient - The topping name.
+ */
+    removeClickedIngredient(ingredientElement, ingredient) {
+        this.container.removeChild(ingredientElement); // Remove the clicked element
+
+        // Inform SandwichApp to update the price
+        document.dispatchEvent(new CustomEvent("ingredientRemoved", { detail: ingredient }));
     }
 
     /**
@@ -92,4 +111,5 @@ export class SammichBuilder {
 
         ingredientDiv.appendChild(image); // Add the image to the ingredientDiv
     }
+
 }
