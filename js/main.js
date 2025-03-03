@@ -4,8 +4,7 @@
  *
  * - Listens for the DOMContentLoaded event to ensure the HTML is fully parsed.
  * - Once the DOM is ready, creates a new instance of the SandwichApp class.
- * - (Commented out) Optionally, the instance can be assigned to the global `window`
- *   object for debugging or console-based interaction.
+ * - Initializes the Bootstrap tooltip for help info.
  *
  * Usage:
  *  1. This script is included via a <script type="module" src="main.js"></script>
@@ -22,17 +21,13 @@
 
 import { SandwichApp } from "./sammich-app.js";
 
-// document.addEventListener("DOMContentLoaded", () => {
-//     const app = new SandwichApp();
-//     // window.app = new SandwichApp(); // Optionally, create and expose for global debugging
-// });
-
 document.addEventListener("DOMContentLoaded", () => {
     const app = new SandwichApp();
 
-    // Initialize the tooltip for the help button
-    const helpButton = document.getElementById("help-button");
+    // ✅ Initialize Bootstrap tooltip for the help button
+    const helpButton = document.getElementById("help-info");
     if (helpButton) {
         new bootstrap.Tooltip(helpButton);
     }
 });
+

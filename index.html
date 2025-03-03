@@ -18,7 +18,7 @@
     <h1>Make your sandwich 🥪</h1>
     <!-- Help button with tooltip -->
     <div class="text-center mt-3">
-      <button id="help-button" class="help" data-bs-toggle="tooltip" data-bs-placement="bottom"
+      <button id="help-info" class="help" data-bs-toggle="tooltip" data-bs-placement="bottom"
         title="Click on a topping to add it to your sandwich. Click on an ingredient in your sandwich to remove it. Use the buttons below to remove the last ingredient or clear all ingredients.">
         Need Help?
       </button>
@@ -33,7 +33,7 @@
 
   <!-- Display the base price dynamically  -->
   <div class="sandwich-container mt-5 mb 5">
-    <div class="col-sm-3 text-center">
+    <div id="price-container" class="col-sm-3 text-center">
       <h2 class="mt-3">Price:</h2>
       <span id="running-total" class="fs-3 fw-bold"></span>
     </div>
