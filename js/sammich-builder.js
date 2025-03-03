@@ -33,10 +33,10 @@ export class SammichBuilder {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
         this.ingredientsImages = {
-            turkey: "./assets/turkey.jpg",
-            tofu: "/assets/tofu.jpg",
-            lettuce: "/assets/lettuce.jpg",
-            tomato: "/assets/tomato.jpg",
+            turkey: "assets/turkey.jpg",
+            tofu: "assets/tofu.jpg",
+            lettuce: "assets/lettuce.jpg",
+            tomato: "assets/tomato.jpg",
         };
     }
 
