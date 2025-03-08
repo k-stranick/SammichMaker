@@ -13,15 +13,16 @@
  *  const app = new SandwichApp();
  ********************************************************************************/
 
-import { SammichBuilder } from "./sammich-builder.js";
-import { ToppingPriceManager } from "./topping-price-manager.js";
-import { ButtonGenerator } from "./button-generator.js";
+// import { SammichBuilder } from "./sammich-builder.js";
+// import { ToppingPriceManager } from "./topping-price-manager.js";
+// import { ButtonGenerator } from "./button-generator.js";
 
 /**
  * SandwichApp is responsible for managing the sandwich-making application.
  * It handles user interactions, updates the total price, and manages the sandwich layers.
  */
-export class SandwichApp {
+// export class SandwichApp {
+class SandwichApp {
 
     /**
      * Creates an instance of SandwichApp.

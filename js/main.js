@@ -19,7 +19,7 @@
  * assigning it to `window.app` if you need direct access via the browser console.
  ********************************************************************************/
 
-import { SandwichApp } from "./sammich-app.js";
+//import { SandwichApp } from "./sammich-app.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const app = new SandwichApp();

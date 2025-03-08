@@ -23,7 +23,8 @@
  * SammichBuilder is responsible for managing the sandwich HTML layers within a specified container.
  * It allows adding ingredients as layers to the sandwich.
  */
-export class SammichBuilder {
+//export class SammichBuilder {
+class SammichBuilder {
 
     /**
      * Creates an instance of SammichBuilder.

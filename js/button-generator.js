@@ -14,9 +14,10 @@
  *  const buttonGenerator = new ButtonGenerator('topping-button-container', ['turkey', 'tofu', 'lettuce', 'tomato'], handleButtonClick);
  ********************************************************************************/
 
-import { ToppingPriceManager } from "./topping-price-manager.js";
+// import { ToppingPriceManager } from "./topping-price-manager.js";
 
-export class ButtonGenerator {
+// export class ButtonGenerator {
+class ButtonGenerator {
     /**
      * Creates a new ButtonGenerator instance.
      * @param {string} containerId - The ID of the container where buttons will be added.

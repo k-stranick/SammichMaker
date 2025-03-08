@@ -18,7 +18,8 @@
  *  toppingManager.addToppingPrice('turkey');
  *  console.log(toppingManager.getFormattedTotal());
  ********************************************************************************/
-export class ToppingPriceManager {
+// export class ToppingPriceManager {
+class ToppingPriceManager {
 
     constructor() {
 
